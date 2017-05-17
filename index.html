@@ -110,13 +110,19 @@
 				}
 				
 				this.sort();
-				this.print();
 				
 				// mate the genes with the lowest cost
 				var children = this.genePool[0].mate(this.genePool[1]);
 				
 				// remove the genes with the highest cost and replace them with the new children
 				this.genePool.splice(this.genePool.length - 2, 2, children[0], children[1]);
+				
+				// calculate the respective difference for the children genes
+				this.genePool[this.genePool.length-1].calcDiff(this.targetChromosome);
+				this.genePool[this.genePool.length-2].calcDiff(this.targetChromosome);
+				
+				this.sort();
+				this.print();
 				
 				for (var i = 0; i < this.genePool.length; i++) {
 					
